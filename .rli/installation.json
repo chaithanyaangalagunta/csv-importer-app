@@ -1,0 +1,24 @@
+{
+  "appInstallationId": 1,
+  "appId": 1,
+  "versionId": 1,
+  "iparams": {
+    "Sample text field": "test",
+    "ss0": "ss0",
+    "ss1": "ss1",
+    "ss2": "ss2"
+  },
+  "secureParams": {
+    "apiKeySecure": {
+      "key": "apiKeySecure",
+      "value": "hello"
+    },
+    "Sample number field": 100
+  },
+  "productIdentifier": "ROCKETLANE",
+  "productAccountId": 1,
+  "createdAt": 1,
+  "isDeleted": false,
+  "disabled": false,
+  "isLatest": true
+}
