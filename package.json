@@ -16,6 +16,7 @@
     "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "csvtojson": "^2.0.10",
     "html-loader": "^5.1.0",
     "lucide-react": "^0.474.0",
     "postcss": "^8.5.1",
@@ -53,11 +54,12 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@types/csvtojson": "^2.0.3",
+    "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3",
-    "babel-loader": "^9.2.1"
+    "typescript": "^5.6.3"
   }
 }

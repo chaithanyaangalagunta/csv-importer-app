@@ -1,41 +1,30 @@
 const axios = require("axios");
 
-const getTaskFields = async () => {
-  let allFields = [];
-  let url = "https://api.rocketlane.com/api/1.0/fields";
-  let hasMore = true;
-  let nextPageToken = null;
+/**
+ * 
+ * curl 'https://smartidly.api.rocketlane.com/api/v1/all-fields' \
+  -H 'api-key: d4d29dea-6071-4793-94ff-e04b1444982e' \
+  -H 'Referer;' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36' \
+  -H 'accept: application/json' \
+  -H 'DNT: 1'
+ */
 
-  while (hasMore) {
-    console.log("Fetching fields", url);
-    const response = await axios.get(url, {
+const getTaskFields = async () => {
+  const response = await axios.get(
+    "https://smartidly.api.rocketlane.com/api/v1/all-fields",
+    {
       headers: {
-        accept: "application/json",
         "api-key": "rl-0d7bb281-fb49-482a-85b7-ac99a29db77b",
       },
-    });
-
-    if (response.data && Array.isArray(response.data.data)) {
-      allFields = allFields.concat(response.data.data);
     }
-
-    const pagination = response.data.pagination;
-    hasMore = pagination && pagination.hasMore;
-    nextPageToken = pagination && pagination.nextPageToken;
-
-    if (hasMore && nextPageToken) {
-      url = `https://api.rocketlane.com/api/1.0/fields?pageToken=${encodeURIComponent(
-        nextPageToken
-      )}`;
-    }
-  }
-
-  const taskFields = allFields.filter((field) => field.objectType === "TASK");
-  return taskFields;
+  );
+  return response.data?.find((e) => e.objectType === "TASK")?.fields;
 };
 
 const run = async (r, args) => {
   const response = await getTaskFields();
+  console.log(response);
   return response;
 };
 
