@@ -25,3 +25,4 @@ yarn-error.log*
 dist/**
 rli-dist/**
 app.zip
+.rli/docs/**

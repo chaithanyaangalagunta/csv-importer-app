@@ -1,4 +1,5 @@
 const csvtojsonV2 = require("csvtojson");
+const axios = require("axios");
 
 const mapTaskFields = (json, mappings) => {
   const mappedTask = { fields: [] };
@@ -29,10 +30,21 @@ const mapTaskFields = (json, mappings) => {
 const run = async (r, args) => {
   try {
     const payload = args.payload;
-    const csvData = payload.csvData;
+    // const csvData = payload.csvData;
     const mappings = payload.mappings;
     const projectId = payload.projectId;
-    const json = await csvtojsonV2().fromString(csvData);
+    const documentId = payload.documentId;
+    
+    console.log(`Getting document ${documentId} via SDK: ${r}`);
+    console.log(Object.keys(r));
+    const document = await r.docs.getDocument(documentId);
+    console.log(document);
+    const csvData = document.signedUrl;
+    // read the file from the signed url
+    const response = await axios.get(csvData);
+    const text = response.data;
+    console.log(text);
+    const json = await csvtojsonV2().fromString(text);
     const mappedTasks = json.map((task) => mapTaskFields(task, mappings));
     console.log(JSON.stringify(mappedTasks));
 

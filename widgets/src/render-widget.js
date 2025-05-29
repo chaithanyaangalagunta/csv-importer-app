@@ -91,12 +91,15 @@ const CSVUploader = ({ fields, app }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [mappings, setMappings] = useState({});
   const fileInputRef = useRef(null);
+  const [documentId, setDocumentId] = useState(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile && selectedFile.type === "text/csv") {
       setFile(selectedFile);
       parseCSV(selectedFile);
+      const doc = await app.docs.uploadDocument(selectedFile);
+      setDocumentId(doc.documentId);
     }
   };
 
@@ -204,6 +207,7 @@ const CSVUploader = ({ fields, app }) => {
         csvData: stringifiedCsvData,
         mappings: mappings,
         projectId: projectData?.project?.projectId,
+        documentId,
       });
     };
 

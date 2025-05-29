@@ -24,7 +24,7 @@ const getTaskFields = async () => {
 
 const run = async (r, args) => {
   const response = await getTaskFields();
-  console.log(response);
+
   return response;
 };
 
